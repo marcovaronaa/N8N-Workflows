@@ -1,0 +1,208 @@
+{
+  "updatedAt": "2025-11-11T14:25:19.000Z",
+  "createdAt": "2025-11-11T12:47:25.491Z",
+  "id": "sXzDOK66RRkHqWzV",
+  "name": "My workflow",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        80
+      ],
+      "id": "8d0f1a63-fe3e-41e5-8f81-24cf297fa6f2",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f5644d8-c372-404c-bb43-e63fb681735e",
+              "name": "url",
+              "value": "https://exercisedb.p.rapidapi.com",
+              "type": "string"
+            },
+            {
+              "id": "ce9b4c53-a191-4c4c-9660-e66ffe715490",
+              "name": "limit",
+              "value": "2",
+              "type": "string"
+            },
+            {
+              "id": "f55acd09-e688-45f6-9640-f5f83d7d305b",
+              "name": "apikey",
+              "value": "85d25f49aamshea30e9467e96402p17c513jsn3c0d9166d911",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -64,
+        80
+      ],
+      "id": "40da52a6-5c71-4c0f-906f-7f629783cd50",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}/exercises",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit",
+              "value": "={{ $json.limit }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "exercisedb.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "={{ $json.apikey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        -80
+      ],
+      "id": "662e66a1-8630-4a22-a44e-6cc80a5f355c",
+      "name": "Exercises"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}/exercises/targetList",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "exercisedb.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "={{ $json.apikey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        96
+      ],
+      "id": "cd994516-8128-4182-b6f3-9b3794c06378",
+      "name": "Exercises1"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}/exercises",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit",
+              "value": "={{ $json.limit }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "exercisedb.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "={{ $json.apikey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        224,
+        288
+      ],
+      "id": "b13e4fbf-6092-43fa-881f-809cbed5ee7d",
+      "name": "Exercises2"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Exercises",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Exercises1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Exercises2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "f944fd4a-0973-4e5e-a3b3-f5ea4272d609",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-11-11T12:47:25.493Z",
+      "createdAt": "2025-11-11T12:47:25.493Z",
+      "role": "workflow:owner",
+      "workflowId": "sXzDOK66RRkHqWzV",
+      "projectId": "BWdf55AqnHRUVkMv"
+    }
+  ],
+  "tags": []
+}
+
