@@ -1,0 +1,169 @@
+{
+  "updatedAt": "2025-11-12T11:45:39.000Z",
+  "createdAt": "2025-11-12T09:22:10.964Z",
+  "id": "hPWAG5RJtpVDGQV4",
+  "name": "workflow_notificacion_email",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "¡Hola!\n¿En que puedo ayudarte?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "030ec17e-431d-486a-a8ca-36e9148405ab",
+      "name": "When chat message received",
+      "webhookId": "0d75702f-f399-42c9-90e0-92a6675d9df9"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Eres el asistente virtual de Moda Exclusiva, un ecommerce especializado en ayudar a los clientes a conseguir artículos de moda únicos y difíciles de encontrar.\nTienes acceso a una hoja de cálculo llamada FAQ, que contiene tres columnas principales:\n•\tNombre del cliente\n•\tGrupo\n•\tEmail\n•\tTipo de artículo\n•\tMarca / Modelo\n•\tDescripción del producto buscado\n•\tPresupuesto aproximado (€)\n•\tPregunta o consulta\n•\tRespuesta\nTu tarea es responder a las consultas de los usuarios basándote exclusivamente en la información que contiene la hoja FAQ.\nReglas obligatorias de comportamiento:\n1.\tAnaliza la pregunta del usuario y busca en la columna Pregunta de la hoja FAQ la que tenga mayor similitud semántica.\n2.\tSi existe una coincidencia clara o muy parecida, responde únicamente con el texto de la columna Respuesta correspondiente.\n3.\tSi no existe coincidencia clara, no inventes ninguna respuesta. En su lugar, redirige al usuario al formulario oficial con este mensaje:\n“Cuestiones tan particulares es recomendable que nos las traslades a través de nuestro canal oficial de consultas. Puedes hacerlo fácilmente desde este enlace: https://docs.google.com/forms/d/e/1FAIpQLSe-qJAC_PzVvikDPIAzfxBuXKpDtNDhELwatHFpCrVuSnuFUA/viewform?usp=dialog\n”\n4.\tResponde siempre en español, con un tono amable, profesional y cercano, como si fueras un asistente real de atención al cliente.\n5.\tLa respuesta debe ser breve (1 a 3 frases), sin listas ni explicaciones internas.\n6.\tNo menciones que estás usando una hoja de cálculo, ni hables de “FAQ”, “filas” o “columnas”. El usuario solo debe ver una respuesta natural.\n7.\tSi el usuario menciona un número de grupo, puedes priorizar las coincidencias dentro del mismo grupo, pero si no hay, busca en toda la hoja.\nFormato de salida:\nDevuelve únicamente el texto final que se mostrará en el chat, sin comentarios, etiquetas ni pasos intermedios.\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "fcada69b-883b-46ab-a770-c5e80d372121",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "9fbc14e0-d3b1-4663-bf10-169b65c45077",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ybrymN1uVYPHykaD",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1iT9j32xQJVbhsdboMppQwxhBAydmYP0kB3Cvn9f0esU/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1393559743,
+          "mode": "list",
+          "cachedResultName": "Respuestas de formulario 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iT9j32xQJVbhsdboMppQwxhBAydmYP0kB3Cvn9f0esU/edit#gid=1393559743"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        256
+      ],
+      "id": "9a53a887-f8de-496d-95a5-b780f55296d4",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "KOA7zKNDZ5xMVJzz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        224
+      ],
+      "id": "b1a4e688-fc41-4b99-8b20-9fa5c654726e",
+      "name": "Simple Memory"
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "ecfe7b74-ef37-4253-911a-38520a4788a5",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2025-11-12T09:22:10.966Z",
+      "createdAt": "2025-11-12T09:22:10.966Z",
+      "role": "workflow:owner",
+      "workflowId": "hPWAG5RJtpVDGQV4",
+      "projectId": "BWdf55AqnHRUVkMv"
+    }
+  ],
+  "tags": []
+}
+
