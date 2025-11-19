@@ -1,0 +1,158 @@
+{
+  "updatedAt": "2025-11-11T16:02:58.000Z",
+  "createdAt": "2025-11-10T12:32:39.164Z",
+  "id": "YaWxoqVNDSMwKr0O",
+  "name": "Udia(Mi primer workflow)",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Newsletter N8N",
+        "formDescription": "Las ultimas noticias de N8N en tu email",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nombre",
+              "placeholder": "Aqui tu nombre"
+            },
+            {
+              "fieldLabel": "Email",
+              "placeholder": "Aqui tu email"
+            },
+            {
+              "fieldType": "html",
+              "html": "<div>\n  <input\n    type=\"checkbox\"\n    id=\"acepto-privacidad\"\n    name=\"acepto_privacidad\"\n    required\n  >\n  <label for=\"acepto-privacidad\">\n    He leído y acepto la\n    <a href=\"/politica-de-privacidad\" target=\"_blank\" rel=\"noopener noreferrer\">\n      Política de Privacidad\n    </a>.\n  </label>\n</div>\n\n\n"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -320,
+        -32
+      ],
+      "id": "99d7f384-9329-4845-aacf-197a93dcbb66",
+      "name": "On form submission",
+      "webhookId": "48748e9e-5f49-4158-a99b-6a919ce536e6"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1PIpSaLQAaH4M4AAjUphPdlalZLwAmL5jhLLEMccCIfM/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1PIpSaLQAaH4M4AAjUphPdlalZLwAmL5jhLLEMccCIfM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.Email }}",
+            "Nombre": "={{ $json.Nombre }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -112,
+        -32
+      ],
+      "id": "8aba81cb-fdd0-4fed-acdc-1df1d30d6647",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "KOA7zKNDZ5xMVJzz",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "99ac760c-a27f-4c5a-a009-696e1b9a72d4",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-11-10T12:32:39.167Z",
+      "createdAt": "2025-11-10T12:32:39.167Z",
+      "role": "workflow:owner",
+      "workflowId": "YaWxoqVNDSMwKr0O",
+      "projectId": "BWdf55AqnHRUVkMv"
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2025-11-10T12:34:33.843Z",
+      "createdAt": "2025-11-10T12:34:33.843Z",
+      "id": "WvP36dycycvaX9B4",
+      "name": "🧠Udia"
+    },
+    {
+      "updatedAt": "2025-11-10T12:34:23.384Z",
+      "createdAt": "2025-11-10T12:34:23.384Z",
+      "id": "e6bYFRPdQc8aIn2v",
+      "name": "🔴Desarrollo"
+    }
+  ]
+}
+
