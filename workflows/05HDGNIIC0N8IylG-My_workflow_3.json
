@@ -1,0 +1,91 @@
+{
+  "updatedAt": "2025-11-11T15:59:13.000Z",
+  "createdAt": "2025-11-11T15:27:17.076Z",
+  "id": "05HDGNIIC0N8IylG",
+  "name": "My workflow 3",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        -32
+      ],
+      "id": "799ebea1-10d7-4cc2-bfbe-4f4de90929c9",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://www.techradar.com/rss",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        -32
+      ],
+      "id": "60064022-b079-4f3a-9ff5-e53f3e11a6e2",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nconst out = items.map(it => {\n  const data = { ...(it.json ?? it) };\n\n  // Aseguramos que existe un título\n  const title = data.title || '';\n\n  // Busca \"open source\" sin distinguir mayúsculas\n  if (title.toLowerCase().includes(\"open source\")) {\n    // Evita duplicar si ya está puesto\n    if (!title.startsWith(\"UDIA:\")) {\n      data.title = `UDIA: ${title}`;\n    }\n  }\n\n  return { ...it, json: data };\n});\n\nreturn out;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        -176
+      ],
+      "id": "0ba213b7-8adc-4ac6-bec0-ad42209bac5c",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "374786b6-9aa5-48a3-a73b-24b3a419b992",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-11-11T15:27:17.079Z",
+      "createdAt": "2025-11-11T15:27:17.079Z",
+      "role": "workflow:owner",
+      "workflowId": "05HDGNIIC0N8IylG",
+      "projectId": "BWdf55AqnHRUVkMv"
+    }
+  ],
+  "tags": []
+}
+
