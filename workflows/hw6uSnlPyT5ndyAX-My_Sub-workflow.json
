@@ -1,0 +1,83 @@
+{
+  "updatedAt": "2025-11-17T16:56:45.264Z",
+  "createdAt": "2025-11-17T16:56:45.264Z",
+  "id": "hw6uSnlPyT5ndyAX",
+  "name": "My Sub-workflow",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        352,
+        272
+      ],
+      "id": "e06bd750-0752-4559-a5aa-50e0a7f34ab4",
+      "name": "Default Data Loader",
+      "disabled": false,
+      "parameters": {
+        "notice": "",
+        "dataType": "binary",
+        "binaryMode": "allInputData",
+        "loader": "auto",
+        "textSplittingMode": "simple",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "file",
+                "value": ""
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "e22608c1-a431-4b5e-8fc8-07e2ec01103e",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        144,
+        272
+      ],
+      "parameters": {
+        "inputSource": "passthrough"
+      }
+    }
+  ],
+  "connections": {
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "e5eb3714-b187-4a7a-8fd2-2ccb79dbc9bb",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-11-17T16:56:45.266Z",
+      "createdAt": "2025-11-17T16:56:45.266Z",
+      "role": "workflow:owner",
+      "workflowId": "hw6uSnlPyT5ndyAX",
+      "projectId": "BWdf55AqnHRUVkMv"
+    }
+  ],
+  "tags": []
+}
+
