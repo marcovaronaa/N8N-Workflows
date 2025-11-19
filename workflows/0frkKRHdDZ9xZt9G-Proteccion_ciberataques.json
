@@ -1,0 +1,55 @@
+{
+  "updatedAt": "2025-11-11T16:24:41.000Z",
+  "createdAt": "2025-11-11T16:11:02.439Z",
+  "id": "0frkKRHdDZ9xZt9G",
+  "name": "Proteccion ciberataques",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "udiasecurity",
+        "authentication": "jwtAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9a356e8b-e3a9-41f5-a7cc-44f263925ea7",
+      "name": "Webhook",
+      "webhookId": "b1d4bb1c-1e1f-4583-9a89-061f074051ce",
+      "credentials": {
+        "jwtAuth": {
+          "id": "c2sYfH5dFcjxiOc7",
+          "name": "JWT Auth account"
+        }
+      }
+    }
+  ],
+  "connections": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "a96ad5db-8094-49c1-bf56-4b8d44f2e8db",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-11-11T16:11:02.442Z",
+      "createdAt": "2025-11-11T16:11:02.442Z",
+      "role": "workflow:owner",
+      "workflowId": "0frkKRHdDZ9xZt9G",
+      "projectId": "BWdf55AqnHRUVkMv"
+    }
+  ],
+  "tags": []
+}
+
