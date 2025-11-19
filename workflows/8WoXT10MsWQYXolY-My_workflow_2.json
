@@ -1,0 +1,118 @@
+{
+  "updatedAt": "2025-11-11T16:03:32.000Z",
+  "createdAt": "2025-11-11T15:16:11.565Z",
+  "id": "8WoXT10MsWQYXolY",
+  "name": "My workflow 2",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -48
+      ],
+      "id": "22db82a4-b571-4e0b-b0bc-d6c194bccfa3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "base",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        192,
+        -128
+      ],
+      "id": "13760377-39c9-4937-8d96-d039b426e3f6",
+      "name": "Get many bases",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ST5jAaI3NpRxGTEt",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini-2024-07-18",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI-2024-07-18"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "Hola Saluda a mis alumnos de UDIA.ES"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        128,
+        96
+      ],
+      "id": "6d4d0f30-13ac-4227-8394-0badd0001a59",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "E6hhMfLSqpq0XFRb",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get many bases",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "5ac0944f-3720-4e4b-83d5-bda6bdb173c3",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-11-11T15:16:11.567Z",
+      "createdAt": "2025-11-11T15:16:11.567Z",
+      "role": "workflow:owner",
+      "workflowId": "8WoXT10MsWQYXolY",
+      "projectId": "BWdf55AqnHRUVkMv"
+    }
+  ],
+  "tags": []
+}
+
