@@ -1,0 +1,91 @@
+{
+  "updatedAt": "2025-11-11T14:35:28.000Z",
+  "createdAt": "2025-11-11T14:26:14.594Z",
+  "id": "BcSzCIk6IVZ6r92c",
+  "name": "Bot telegram errores",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -256,
+        -32
+      ],
+      "id": "485d13fe-ccd1-4320-b827-abf12c8f1eae",
+      "name": "Telegram Trigger",
+      "webhookId": "c4e7afb0-48dc-48c6-ab03-96f06e95333e",
+      "credentials": {
+        "telegramApi": {
+          "id": "E9ksDCY4JTfWvv0O",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.chat.id }}",
+        "text": "=Eco: {{ $json.message.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -48,
+        -32
+      ],
+      "id": "563045bd-d83e-4d9a-97b9-cf9a43bf717a",
+      "name": "Send a text message",
+      "webhookId": "301b7652-5391-4736-a1ce-7ff968bf7714",
+      "credentials": {
+        "telegramApi": {
+          "id": "E9ksDCY4JTfWvv0O",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "56ae5e1b-a207-4728-9053-0143e5a50561",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-11-11T14:26:14.596Z",
+      "createdAt": "2025-11-11T14:26:14.596Z",
+      "role": "workflow:owner",
+      "workflowId": "BcSzCIk6IVZ6r92c",
+      "projectId": "BWdf55AqnHRUVkMv"
+    }
+  ],
+  "tags": []
+}
+
